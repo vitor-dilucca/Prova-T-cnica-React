@@ -1,25 +1,55 @@
 import "./App.css";
+import { useState } from "react";
 
-const INITIAL_ITEMS = [
+interface Item {
+  id: `${string}-${string}-${string}-${string}-${string}`;
+  timestamp: number;
+  text: string;
+}
+
+const INITIAL_ITEMS: Item[] = [
   {
-    id:crypto.randomUUID(),
-    timestamp: new Date(),
-    text: 'Videojuegos',
+    id: crypto.randomUUID(),
+    timestamp: Date.now(),
+    text: "Videojuegos",
   },
   {
-    id:crypto.randomUUID(),
-    timestamp: new Date(),
-    text: 'Libros',
-  }
-]
+    id: crypto.randomUUID(),
+    timestamp: Date.now(),
+    text: "Libros",
+  },
+];
 
 function App() {
+  const [items, setItems] = useState(INITIAL_ITEMS);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const { elements } = event.currentTarget;
+    const input = elements.namedItem("item");
+    const isInput = input instanceof HTMLInputElement; //javascript puro
+    if (!isInput || input == null) return;
+
+    const newItem: Item = {
+      id: crypto.randomUUID(),
+      text: input.value,
+      timestamp: Date.now(),
+    };
+
+    setItems((prevItems) => {
+      return [...prevItems, newItem];
+    });
+
+    input.value = "";
+  };
+
   return (
     <main>
       <aside>
         <h1>Prueba tecnica de react</h1>
         <h2>Anadir e y eliminar elementos de una lista</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label>
             Elemento a introducir:
             <input name="item" required placeholder="Videojuegos" type="text" />
@@ -28,12 +58,11 @@ function App() {
         </form>
       </aside>
       <section>
-        <h2>Mi prueba tecnica</h2>
+        <h2>Lista de elementos</h2>
         <ul>
-          <li>Videojuegos</li>
-          <li>Libros</li>
-          <li>Series</li>
-          <li>Peliculas</li>
+          {items.map((item) => {
+            return <li key={item.id}>{item.text}</li>;
+          })}
         </ul>
       </section>
     </main>

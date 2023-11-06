@@ -15,14 +15,13 @@ function App() {
         </form>
       </aside>
       <section>
-      <h2>Mi prueba tecnica</h2>
-      <ul>
-        <li>Videojuegos</li>
-        <li>Libros</li>
-        <li>Series</li>
-        <li>Peliculas</li>
-      </ul>
-
+        <h2>Mi prueba tecnica</h2>
+        <ul>
+          <li>Videojuegos</li>
+          <li>Libros</li>
+          <li>Series</li>
+          <li>Peliculas</li>
+        </ul>
       </section>
     </main>
   );

@@ -1,5 +1,18 @@
 import "./App.css";
 
+const INITIAL_ITEMS = [
+  {
+    id:crypto.randomUUID(),
+    timestamp: new Date(),
+    text: 'Videojuegos',
+  },
+  {
+    id:crypto.randomUUID(),
+    timestamp: new Date(),
+    text: 'Libros',
+  }
+]
+
 function App() {
   return (
     <main>

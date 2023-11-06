@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 
+type ItemId = `${string}-${string}-${string}-${string}-${string}`
 interface Item {
   id: `${string}-${string}-${string}-${string}-${string}`;
   timestamp: number;
@@ -26,8 +27,10 @@ function App() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    //aqui usamos o 'elements' como alternativa ao aproach do querySelector, para selecionar os 'form controls'
     const { elements } = event.currentTarget;
     const input = elements.namedItem("item");
+    //isso aqui ta checando se o input é um input (??) é mais q nada por frescuras do typescript
     const isInput = input instanceof HTMLInputElement; //javascript puro
     if (!isInput || input == null) return;
 
@@ -43,6 +46,13 @@ function App() {
 
     input.value = "";
   };
+
+  const createHandleRemoveItem = (id:ItemId) => ()=>{
+      setItems(prevItems=>{
+        return prevItems.filter(currentItem=>currentItem.id!==id)
+      })
+    }
+
 
   return (
     <main>
@@ -61,7 +71,12 @@ function App() {
         <h2>Lista de elementos</h2>
         <ul>
           {items.map((item) => {
-            return <li key={item.id}>{item.text}</li>;
+            return (
+              <li key={item.id}>
+                {item.text}
+                <button onClick={createHandleRemoveItem(item.id)}>Eliminar elemento</button>
+              </li>
+            );
           })}
         </ul>
       </section>

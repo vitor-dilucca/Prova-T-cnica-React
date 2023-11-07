@@ -8,21 +8,21 @@ interface Item {
   text: string;
 }
 
-const INITIAL_ITEMS: Item[] = [
-  {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: "Videojuegos",
-  },
-  {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: "Libros",
-  },
-];
+// const INITIAL_ITEMS: Item[] = [
+//   {
+//     id: crypto.randomUUID(),
+//     timestamp: Date.now(),
+//     text: "Videojuegos",
+//   },
+//   {
+//     id: crypto.randomUUID(),
+//     timestamp: Date.now(),
+//     text: "Libros",
+//   },
+// ];
 
 function App() {
-  const [items, setItems] = useState(INITIAL_ITEMS);
+  const [items, setItems] = useState<Item[]>([]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -58,7 +58,7 @@ function App() {
       <aside>
         <h1>Prueba tecnica de react</h1>
         <h2>Anadir e y eliminar elementos de una lista</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} aria-label="Añadir elementos a la lista">
           <label>
             Elemento a introducir:
             <input name="item" required placeholder="Videojuegos" type="text" />

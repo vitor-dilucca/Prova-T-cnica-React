@@ -44,5 +44,6 @@ describe("<App/>", () => {
 
     const noResults = screen.getByText('No hay elementos en la lista.')
     expect(noResults).toBeDefined()
+    console.log(list.childNodes.length)
   });
 });

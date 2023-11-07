@@ -8,13 +8,14 @@ describe("useItems hook", () => {
 
     expect(result.current.items.length).toBe(0);
 
+    //act serve para realizar ações assíncronas
     act(() => {
       result.current.addItem("Jugar juegos");
       result.current.addItem("Ir a correr");
     });
-    
+
     expect(result.current.items.length).toBe(2);
-    
+
     act(() => {
       result.current.removeItem("Jugar juegos");
     });
